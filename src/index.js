@@ -17,15 +17,19 @@ async function processWeather() {
   const data = await getWeather();
   console.log(data);
   const weather = {
-    currentTempCelsius: data.currentConditions.temp,
-    currentTempFahrenheit: (data.currentConditions.temp * 9) / 5 + 32,
+    currentTempCelsius: Math.floor(data.currentConditions.temp),
+    currentTempFahrenheit: Math.floor(
+      (data.currentConditions.temp * 9) / 5 + 32,
+    ),
     icon: data.currentConditions.icon,
-    description: data.currentConditions.description,
-    days: data.days.slice(1, 7).map((element) => {
+    description: data.description,
+    days: data.days.slice(1, 8).map((element) => {
       return {
         date: element.datetime,
         tempmax: element.tempmax,
         tempmin: element.tempmin,
+        tempmaxF: Math.floor((element.tempmax * 9) / 5 + 32),
+        tempminF: Math.floor((element.tempmin * 9) / 5 + 32),
         icon: element.icon,
       };
     }),
@@ -33,4 +37,9 @@ async function processWeather() {
   return weather;
 }
 
-processWeather();
+async function main() {
+  const processed = await processWeather();
+  console.log(processed);
+}
+
+main();
