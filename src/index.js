@@ -13,7 +13,7 @@ async function getWeather() {
   }
 }
 
-async function processWeather() {
+export async function processWeather() {
   const data = await getWeather();
   console.log(data);
   const weather = {
