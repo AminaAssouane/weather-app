@@ -4,6 +4,7 @@ const cityInput = document.getElementById("city");
 
 // Grabbing the elements that showcase the current weather in our chosen city
 const currentWeather = document.getElementById("current-weather");
+const cityName = document.getElementById("city-name");
 const iconContainer = document.getElementById("icon-container");
 const currentTemp = document.getElementById("current-temp");
 const description = document.getElementById("description");
@@ -28,8 +29,24 @@ async function renderWeatherIcon(iconName, container) {
 async function displayCurrentWeather(weather) {
   iconContainer.classList.add("weather-icon-container");
   await renderWeatherIcon(weather.icon, iconContainer);
+  const svg = iconContainer.querySelector("svg");
 
-  currentTemp.textContent = weather.currentTempCelsius;
+  if (svg) {
+    // 1. Remove fixed sizing
+    svg.removeAttribute("width");
+    svg.removeAttribute("height");
+
+    // 2. Add a viewBox (based on original size)
+    svg.setAttribute("viewBox", "0 0 56 48");
+
+    // 3. Let CSS control size
+    svg.style.width = "100px";
+    svg.style.height = "100px";
+    svg.style.display = "block";
+  }
+
+  cityName.textContent = weather.address;
+  currentTemp.textContent = `${weather.currentTempCelsius}°`;
   description.textContent = weather.description;
   currentWeather.append(currentTemp, description);
 }
@@ -52,8 +69,8 @@ async function displayDayWeather(weather, day) {
   dayContainer.classList.add("day");
 
   date.textContent = weather.days[day].date;
-  tempMax.textContent = weather.days[day].tempmax;
-  tempMin.textContent = weather.days[day].tempmin;
+  tempMax.textContent = `${weather.days[day].tempmax}°`;
+  tempMin.textContent = `${weather.days[day].tempmin}°`;
 
   dayContainer.append(date, weekIconContainer, temps);
   weekWeather.appendChild(dayContainer);

@@ -20,6 +20,7 @@ export async function processWeather(city) {
   const data = await getWeather(city);
   console.log(data);
   const weather = {
+    address: data.address,
     currentTempCelsius: Math.floor(data.currentConditions.temp),
     currentTempFahrenheit: Math.floor(
       celsiusToFahrenheit(data.currentConditions.temp),
