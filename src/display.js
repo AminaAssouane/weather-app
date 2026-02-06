@@ -64,6 +64,8 @@ async function main(city) {
   loading.style.display = "block";
   try {
     const weather = await logic.processWeather(city);
+    // Clearing previous weather first
+    weekWeather.innerHTML = ""; // clears weekly forecast
     await displayCurrentWeather(weather);
     for (let i = 0; i < 7; i++) {
       console.log(i);
