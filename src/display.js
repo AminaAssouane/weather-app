@@ -4,6 +4,7 @@ const cityInput = document.getElementById("city");
 
 // Grabbing the elements that showcase the current weather in our chosen city
 const currentWeather = document.getElementById("current-weather");
+const iconContainer = document.getElementById("icon-container");
 const currentTemp = document.getElementById("current-temp");
 const description = document.getElementById("description");
 
@@ -12,8 +13,22 @@ const weekWeather = document.getElementById("week-weather");
 
 const loading = document.getElementById("loading");
 
+// loadIcon fetches the SVG file as text
+async function loadIcon(path) {
+  const res = await fetch(path); // fetch the SVG file
+  return await res.text(); // return SVG code as string
+}
+
+async function renderWeatherIcon(iconName, container) {
+  const svgHTML = await loadIcon(`/assets/weather-icons/${iconName}.svg`);
+  container.innerHTML = svgHTML;
+}
+
 // Displays the current day's weather
-function displayCurrentWeather(weather) {
+async function displayCurrentWeather(weather) {
+  iconContainer.classList.add("weather-icon-container");
+  await renderWeatherIcon(weather.icon, iconContainer);
+
   currentTemp.textContent = weather.currentTempCelsius;
   description.textContent = weather.description;
   currentWeather.append(currentTemp, description);
@@ -43,8 +58,9 @@ async function main(city) {
   loading.style.display = "block";
   try {
     const weather = await logic.processWeather(city);
-    displayCurrentWeather(weather);
+    await displayCurrentWeather(weather);
     for (let i = 0; i < 7; i++) {
+      console.log(i);
       displayDayWeather(weather, i);
     }
   } catch (err) {
