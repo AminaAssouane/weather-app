@@ -29,8 +29,8 @@ export async function processWeather(city) {
     days: data.days.slice(1, 8).map((element) => {
       return {
         date: element.datetime,
-        tempmax: element.tempmax,
-        tempmin: element.tempmin,
+        tempmax: Math.floor(element.tempmax),
+        tempmin: Math.floor(element.tempmin),
         tempmaxF: Math.floor(celsiusToFahrenheit(element.tempmax)),
         tempminF: Math.floor(celsiusToFahrenheit(element.tempmin)),
         icon: element.icon,
