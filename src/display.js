@@ -49,6 +49,7 @@ async function displayDayWeather(weather, day) {
   temps.append(tempMax, tempMin);
 
   const dayContainer = document.createElement("span"); // The container of our temperatures of the day
+  dayContainer.classList.add("day");
 
   date.textContent = weather.days[day].date;
   tempMax.textContent = weather.days[day].tempmax;

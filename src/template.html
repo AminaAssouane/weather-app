@@ -7,15 +7,19 @@
   </head>
   <body>
     <header>
-      <span>Weather Forecast</span>
+      <h1>Weather Forecast</h1>
       <input type="text" id="city" />
     </header>
-    <section id="current-weather">
-      <div id="icon-container"></div>
-      <div id="current-temp"></div>
-      <div id="description"></div>
-      <div id="loading" style="display: none">Loading…</div>
-    </section>
-    <section id="week-weather"></section>
+    <main>
+      <section id="current-weather">
+        <div id="icon-temp">
+          <span id="icon-container"></span>
+          <span id="current-temp"></span>
+        </div>
+        <div id="description"></div>
+        <div id="loading" style="display: none">Loading…</div>
+      </section>
+      <section id="week-weather"></section>
+    </main>
   </body>
 </html>

@@ -2,6 +2,71 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family:
+    "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans",
+    Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to right, #0f1a40, #1e3a8a);
+  color: white;
+  height: 80px;
+  padding: 20px;
+  border-bottom: 1px solid white;
+  border-radius: 0 0 10px 10px;
+}
+
+input {
+  background: #0f1a40;
+  padding: 5px;
+  padding-left: 20px;
+  border-radius: 10px;
+  border: 1px solid white;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+}
+
+/* Main styling */
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #1e3a8a, #4a90e2);
+  border-top: 1px solid white;
+  border-radius: 10px;
+  color: white;
+  gap: 50px;
+  justify-content: space-around;
+}
+
+#current-weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#icon-temp {
+  display: flex;
+  gap: 20px;
+}
+
+#current-temp {
+  font-size: 200px;
 }
 
 #week-weather {
@@ -9,7 +74,18 @@
   gap: 20px;
 }
 
+.day {
+  background-color: #1e3a8a;
+  border-radius: 10px;
+  height: 120px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .temps {
   display: flex;
-  gap: 10px;
+  gap: 15px;
 }
