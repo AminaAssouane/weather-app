@@ -67,12 +67,13 @@ main {
 #icon-temp {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 20px;
 }
 
 #icon-container,
 #current-temp {
-  display: block; /* ensures flex respects width */
+  display: block;
 }
 
 #current-temp {

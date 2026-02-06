@@ -40,15 +40,14 @@ async function displayCurrentWeather(weather) {
     svg.setAttribute("viewBox", "0 0 56 48");
 
     // 3. Let CSS control size
-    svg.style.width = "100px";
-    svg.style.height = "100px";
+    svg.style.width = "200px";
+    svg.style.height = "200px";
     svg.style.display = "block";
   }
 
   cityName.textContent = weather.address;
   currentTemp.textContent = `${weather.currentTempCelsius}°`;
   description.textContent = weather.description;
-  currentWeather.append(currentTemp, description);
 }
 
 // Displays one day of the week's weather
