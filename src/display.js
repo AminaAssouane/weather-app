@@ -35,8 +35,12 @@ async function displayCurrentWeather(weather) {
 }
 
 // Displays one day of the week's weather
-function displayDayWeather(weather, day) {
+async function displayDayWeather(weather, day) {
   const date = document.createElement("div");
+
+  const weekIconContainer = document.createElement("div");
+  weekIconContainer.classList.add("week-icon");
+  await renderWeatherIcon(weather.days[day].icon, weekIconContainer);
 
   const temps = document.createElement("div");
   const tempMax = document.createElement("span");
@@ -50,9 +54,11 @@ function displayDayWeather(weather, day) {
   tempMax.textContent = weather.days[day].tempmax;
   tempMin.textContent = weather.days[day].tempmin;
 
-  dayContainer.append(date, temps);
+  dayContainer.append(date, weekIconContainer, temps);
   weekWeather.appendChild(dayContainer);
 }
+
+function clearWeek() {}
 
 async function main(city) {
   loading.style.display = "block";
@@ -61,7 +67,7 @@ async function main(city) {
     await displayCurrentWeather(weather);
     for (let i = 0; i < 7; i++) {
       console.log(i);
-      displayDayWeather(weather, i);
+      await displayDayWeather(weather, i);
     }
   } catch (err) {
     console.error(err);
