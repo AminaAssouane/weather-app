@@ -26,14 +26,17 @@ export async function processWeather(city) {
     ),
     icon: data.currentConditions.icon,
     description: data.description,
-    days: data.days.slice(1, 8).map((element) => {
+    days: data.days.slice(1, 8).map((day) => {
+      const dateObj = new Date(day.datetime);
       return {
-        date: element.datetime,
-        tempmax: Math.floor(element.tempmax),
-        tempmin: Math.floor(element.tempmin),
-        tempmaxF: Math.floor(celsiusToFahrenheit(element.tempmax)),
-        tempminF: Math.floor(celsiusToFahrenheit(element.tempmin)),
-        icon: element.icon,
+        date: dateObj
+          .toLocaleDateString("en-GB", { weekday: "short", day: "numeric" })
+          .replace(",", ""),
+        tempmax: Math.floor(day.tempmax),
+        tempmin: Math.floor(day.tempmin),
+        tempmaxF: Math.floor(celsiusToFahrenheit(day.tempmax)),
+        tempminF: Math.floor(celsiusToFahrenheit(day.tempmin)),
+        icon: day.icon,
       };
     }),
   };

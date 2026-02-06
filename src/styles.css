@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#week-weather {
+  display: flex;
+  gap: 20px;
+}
+
+.temps {
+  display: flex;
+  gap: 10px;
+}

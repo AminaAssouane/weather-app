@@ -26,6 +26,7 @@ function displayDayWeather(weather, day) {
   const temps = document.createElement("div");
   const tempMax = document.createElement("span");
   const tempMin = document.createElement("span");
+  temps.classList.add("temps");
   temps.append(tempMax, tempMin);
 
   const dayContainer = document.createElement("span"); // The container of our temperatures of the day
