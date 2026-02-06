@@ -8,6 +8,7 @@ const cityName = document.getElementById("city-name");
 const iconContainer = document.getElementById("icon-container");
 const currentTemp = document.getElementById("current-temp");
 const description = document.getElementById("description");
+const units = document.querySelectorAll(".unit");
 
 // Grabbing the elements that showcase this week's weather in our chosen city
 const weekWeather = document.getElementById("week-weather");
@@ -26,7 +27,7 @@ async function renderWeatherIcon(iconName, container) {
 }
 
 // Displays the current day's weather
-async function displayCurrentWeather(weather) {
+async function displayCurrentWeather(weather, unit) {
   iconContainer.classList.add("weather-icon-container");
   await renderWeatherIcon(weather.icon, iconContainer);
   const svg = iconContainer.querySelector("svg");
@@ -46,12 +47,13 @@ async function displayCurrentWeather(weather) {
   }
 
   cityName.textContent = weather.address;
-  currentTemp.textContent = `${weather.currentTempCelsius}°`;
+  if (unit === "C") currentTemp.textContent = `${weather.currentTempCelsius}°`;
+  else currentTemp.textContent = `${weather.currentTempFahrenheit}°`;
   description.textContent = weather.description;
 }
 
 // Displays one day of the week's weather
-async function displayDayWeather(weather, day) {
+async function displayDayWeather(weather, day, unit) {
   const date = document.createElement("div");
 
   const weekIconContainer = document.createElement("div");
@@ -68,26 +70,30 @@ async function displayDayWeather(weather, day) {
   dayContainer.classList.add("day");
 
   date.textContent = weather.days[day].date;
-  tempMax.textContent = `${weather.days[day].tempmax}°`;
-  tempMin.textContent = `${weather.days[day].tempmin}°`;
+  if (unit === "C") {
+    tempMax.textContent = `${weather.days[day].tempmax}°`;
+    tempMin.textContent = `${weather.days[day].tempmin}°`;
+  } else {
+    tempMax.textContent = `${weather.days[day].tempmaxF}°`;
+    tempMin.textContent = `${weather.days[day].tempminF}°`;
+  }
 
   dayContainer.append(date, weekIconContainer, temps);
   weekWeather.appendChild(dayContainer);
 }
 
-function clearWeek() {}
-
-async function main(city) {
+async function main(city, unit) {
   loading.style.display = "block";
   try {
     const weather = await logic.processWeather(city);
     // Clearing previous weather first
     weekWeather.innerHTML = ""; // clears weekly forecast
-    await displayCurrentWeather(weather);
+    await displayCurrentWeather(weather, unit);
     for (let i = 0; i < 7; i++) {
-      console.log(i);
-      await displayDayWeather(weather, i);
+      await displayDayWeather(weather, i, unit);
     }
+    // Make the C / F toggle visible
+    units.forEach((unit) => (unit.style.display = "block"));
   } catch (err) {
     console.error(err);
   } finally {
@@ -96,5 +102,13 @@ async function main(city) {
 }
 
 cityInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") main(cityInput.value);
+  if (e.key === "Enter") main(cityInput.value, "C");
+});
+
+units.forEach((unit) => {
+  unit.addEventListener("click", () => {
+    units.forEach((u) => u.classList.remove("active"));
+    unit.classList.add("active");
+    main(cityInput.value, unit.textContent);
+  });
 });

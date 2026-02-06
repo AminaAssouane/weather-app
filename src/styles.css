@@ -78,11 +78,14 @@ main {
 
 #current-temp {
   font-size: 200px;
+  line-height: 1;
 }
 
 #description {
   font-size: 20px;
 }
+
+/* Weekly forecast */
 
 #week-weather {
   display: flex;
@@ -103,4 +106,33 @@ main {
 .temps {
   display: flex;
   gap: 15px;
+}
+
+/* Celsius or Fahrenheit */
+#temp-unit {
+  display: flex;
+  align-items: flex-start; /* keeps buttons near the degree */
+  gap: 10px;
+}
+
+#unit-toggle {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px; /* fine-tune vertical alignment */
+}
+
+.unit {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.unit.active {
+  opacity: 1;
+  font-size: 28px;
+  font-weight: bold;
 }

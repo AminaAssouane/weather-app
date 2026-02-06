@@ -43,3 +43,5 @@ export async function processWeather(city) {
   };
   return weather;
 }
+
+export function toggleUnit() {}
