@@ -22,7 +22,7 @@ async function loadIcon(path) {
 }
 
 async function renderWeatherIcon(iconName, container) {
-  const svgHTML = await loadIcon(`/assets/weather-icons/${iconName}.svg`);
+  const svgHTML = await loadIcon(`./assets/weather-icons/${iconName}.svg`);
   container.innerHTML = svgHTML;
 }
 
