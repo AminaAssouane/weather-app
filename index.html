@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="3aba5b1decbf0f0b5f41.png" />
+    <title>Weather App</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <header>
+      <h1>Weather Forecast</h1>
+      <input type="text" id="city" placeholder="Search city..." />
+    </header>
+    <main>
+      <section id="current-weather">
+        <div id="city-name"></div>
+        <div id="icon-temp">
+          <span id="icon-container"></span>
+          <div id="temp-unit">
+            <span id="current-temp"></span>
+            <div id="unit-toggle">
+              <button class="unit active">C</button>
+              <button class="unit">F</button>
+            </div>
+          </div>
+        </div>
+        <div id="description"></div>
+        <div id="loading" style="display: none">Loading…</div>
+      </section>
+      <section id="week-weather"></section>
+    </main>
+  </body>
+</html>
